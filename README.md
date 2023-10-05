@@ -20,4 +20,5 @@ Calculadora binária com sinalização da resposta através dos LEDs de um ardu�
 ## Referências e/ou Materiais de apoio
 
 + [Real Python](https://realpython.com/python-sockets/);
-+ [Docs Python](https://docs.python.org/3/library/socket.html).
++ [Docs Python](https://docs.python.org/3/library/socket.html);
++ [GeeksforGeeks](https://www.geeksforgeeks.org/simple-calculator-in-python-socket-programming/).

@@ -12,11 +12,25 @@ import socket
 HOST = "127.0.0.1"  # O hostname ou endereço IP do servidor
 PORT = 65432  # A porta usada pelo servidor
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
-    s.sendall(b"Testando a conexao")
-    data = s.recv(1024)
+client =  socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-print(f"Received {data!r}")
+client.connect((HOST, PORT))
+
+while True:
+    print("Exemplo de operação : 110 + 101")
+    print("Operações disponíveis : + e -")
+
+    inp = input("Insira os números binários e a operação segundo o exemplo ou digite 'q' para sair: ")
+
+    if inp == "q":
+        break
+
+    client.send(inp.encode())
+
+    answer = client.recv(1024)
+
+    print("Resultado "+answer.decode())
+ 
+client.close()
 
 
