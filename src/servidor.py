@@ -32,7 +32,6 @@ while True:
         print("Conexao encerrada pelo cliente")
         break
  
-    print("Operacao recebida do cliente : ", msg)
     result = 0
     operation_list = msg.split()
     oprnd1 = operation_list[0]
