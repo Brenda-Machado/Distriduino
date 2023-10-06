@@ -8,6 +8,7 @@ Brenda Silva Machado
 
 
 import socket
+import pika
 
 HOST = "127.0.0.1"  # localhost
 PORT = 65432  # Porta para o listen
@@ -15,6 +16,10 @@ PORT = 65432  # Porta para o listen
 server = socket.socket(socket.AF_INET,
                        socket.SOCK_STREAM)
 server.bind((HOST, PORT))
+
+connection = pika.BlockingConnection(pika.ConnectionParameters(HOST))
+channel = connection.channel()
+channel.queue_declare(queue='fila')
 
 server.listen(1)
 
@@ -51,5 +56,9 @@ while True:
     # Conversao para string
     # Envio para o cliente
     output = str(result[2:])
+    channel.basic_publish(exchange='',
+                      routing_key='fila',
+                      body=output)
     clientConnection.send(output.encode())
+    print("pubblished")
 clientConnection.close()
