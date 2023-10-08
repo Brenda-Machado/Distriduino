@@ -60,5 +60,8 @@ while True:
                       routing_key='fila',
                       body=output)
     clientConnection.send(output.encode())
-    print("pubblished")
+    print("Resultado enviado para o mensageiro")
 clientConnection.close()
+
+# Destruir a fila
+channel.queue_delete(queue='fila')
