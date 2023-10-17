@@ -16,21 +16,33 @@ client =  socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 client.connect((HOST, PORT))
 
-while True:
-    print("Exemplo de operação : 110 + 101")
-    print("Operações disponíveis : + e -")
+# Autenticação do cliente
 
-    inp = input("Insira os números binários e a operação segundo o exemplo ou digite 'q' para sair: ")
+token = input("Insira o token de acesso: ")
+client.send(token.encode())
+autenticado = client.recv(1024)
 
-    if inp == "q":
-        break
+if autenticado.decode() == "0":
+    print("Token inválido")
+    client.close()
+    exit()
+else:
+    print("Token válido")
+    while True:
+        print("Exemplo de operação : 110 + 101")
+        print("Operações disponíveis : + e -")
 
-    client.send(inp.encode())
+        inp = input("Insira os números binários e a operação segundo o exemplo ou digite 'q' para sair: ")
 
-    answer = client.recv(1024)
+        if inp == "q":
+            break
 
-    print("Resultado "+answer.decode())
- 
-client.close()
+        client.send(inp.encode())
+
+        answer = client.recv(1024)
+
+        print("Resultado "+answer.decode())
+    
+    client.close()
 
 
