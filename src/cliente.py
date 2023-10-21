@@ -42,6 +42,16 @@ else:
         answer = client.recv(1024)
 
         print("Resultado "+answer.decode())
+
+        print("Aguardando liberação do mensageiro...")
+
+        answer = client.recv(1024)
+
+        print("Pode realizar nova operação")
+
+        print("\n")
+
+
     
     client.close()
 
