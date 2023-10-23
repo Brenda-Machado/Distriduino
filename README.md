@@ -17,18 +17,20 @@ Além disso, deve conter um dos seguintes conteúdos da disciplina:
 
 Calculadora binária com sinalização da resposta através dos LEDs de um arduíno. 
 
-Funcionamento geral:
+## Funcionamento geral:
 
 + O cliente conecta-se com a calculadora, o servidor, por um token;
 + Uma vez autenticado, o cliente pode realizar a operação desejada e a calculadora enviará a resposta pelo terminal;
 + Mensageiro também recebe a resposta através de uma fila de mensagens e exibirá os LEDs correspondentes, nesse caso com prints;
-+ Caso o Arduíno esteja conectado, ele exibirá a resposta recebida do mensageiro em seus LEDs.
++ Caso o Arduíno esteja conectado, ele exibirá a resposta recebida do mensageiro em seus LEDs;
++ Enquanto a mensagem não terminar de ser exibida, o cliente não poderá fazer novas operações.
 
 ## Referências e/ou Materiais de apoio
 
-+ [Real Python](https://realpython.com/python-sockets/);
-+ [Docs Python](https://docs.python.org/3/library/socket.html);
-+ [GeeksforGeeks](https://www.geeksforgeeks.org/simple-calculator-in-python-socket-programming/);
-+ [RabbitMQ](https://www.rabbitmq.com/tutorials/tutorial-one-python.html);
-+ [Padrão Limitação](https://learn.microsoft.com/pt-br/azure/architecture/patterns/throttling);
-+ [Padrão Valet Key](https://learn.microsoft.com/pt-br/azure/architecture/patterns/valet-key).
++ [Real Python - Sockets](https://realpython.com/python-sockets/);
++ [Docs Python - Socket](https://docs.python.org/3/library/socket.html);
++ [GeeksforGeeks - Simple calculator in python socket programming](https://www.geeksforgeeks.org/simple-calculator-in-python-socket-programming/);
++ [RabbitMQ - Tutorial one Python](https://www.rabbitmq.com/tutorials/tutorial-one-python.html);
++ [Microsoft Azure - Throttling](https://learn.microsoft.com/pt-br/azure/architecture/patterns/throttling);
++ [Microsoft Azure - Valet Key](https://learn.microsoft.com/pt-br/azure/architecture/patterns/valet-key);
++ [EE-Diary - LED blink with arduino using pyfirmata](https://www.ee-diary.com/2023/05/led-blink-with-arduino-using-pyfirmata.html).
