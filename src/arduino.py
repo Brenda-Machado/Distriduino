@@ -1,14 +1,23 @@
 """
 
-Mensageiro da aplicação Distriduino, 
+Arduino da aplicação Distriduino, 
 desenvolvida na disciplina de Computação Distribuída, 2023.2.
 Brenda Silva Machado
 
 """
 
-
+import pyfirmata
+import time
 import pika, sys, os
-from time import sleep
+
+board = pyfirmata.Arduino('/dev/ttyACM0')
+
+it = pyfirmata.util.Iterator(board)
+it.start()
+
+board.analog[0].enable_reporting()
+
+board.digital[13].mode = pyfirmata.OUTPUT
 
 def main():
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
@@ -26,26 +35,23 @@ def main():
             for i in range(0, len(resultado)):
                 if resultado[i] == '1':
                     print('Ligando LED')
-                    sleep(0.5)
+                    board.digital[13].write(1)
                 elif resultado[i] == '0':
                     print('Desligando LED')
-                    sleep(0.5)
-            print('Fim da operação \n')
+                    board.digital[13].write(0)
+                time.sleep(5)
+            print('Fim da operação\n')
             channel.basic_publish(exchange='',
                             routing_key='fila',
                             body='fim da operação')
         
     channel.basic_consume(queue='fila', on_message_callback=callback, auto_ack=True)
 
-    print('Esperando resultado da operação...')
+    print('Esperando resultado da operação...\n')
     channel.start_consuming()
-    
-if __name__ == '__main__':
-    try:
-        main()
-    except KeyboardInterrupt:
-        print('Interrompido')
-        try:
-            sys.exit(0)
-        except SystemExit:
-            os._exit(0)
+
+while True:
+    board.digital[13].write(0)
+    time.sleep(3)
+    board.digital[13].write(1)
+    main()
