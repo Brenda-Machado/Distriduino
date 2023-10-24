@@ -32,9 +32,13 @@ Calculadora binária com sinalização da resposta através dos LEDs de um ardu�
 Primeiro deve-se rodar o servidor, o mensageiro e o cliente em terminais (ou máquinas) separados. No caso de máquinas, 
 deve-se especificar no código o adress e o host correspondente.
 
-Abra a pasta do projeto e em seguida a pasta src para todos:
+Abra a pasta do projeto, instale os requirements e em seguida a pasta src para todos:
 
-`$ cd Distriduino/src`
+`$ cd Distriduino`
+
+`$ pip install -r requirements.txt`
+
+`$ cd src`
 
 Em seguida, rode em cada um dos terminais/máquinas o código correspondente, como a seguir:
 
@@ -69,9 +73,13 @@ Caso o arduíno não seja do tipo UNO, deve-se especificar isso também pela cla
 Assim como no tópico anterior, deve-se rodar o servidor, o arduíno e o cliente em terminais (ou máquinas) separados. No caso de máquinas, 
 deve-se especificar no código o adress e o host correspondente.
 
-Abra a pasta do projeto e em seguida a pasta src para todos:
+Abra a pasta do projeto, instale os requirements e em seguida a pasta src para todos:
 
-`$ cd Distriduino/src`
+`$ cd Distriduino`
+
+`$ pip install -r requirements.txt`
+
+`$ cd src`
 
 Em seguida, rode em cada um dos terminais/máquinas o código correspondente, como a seguir:
 
