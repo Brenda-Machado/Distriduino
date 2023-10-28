@@ -12,12 +12,12 @@ import pika, sys, os
 
 board = pyfirmata.Arduino('/dev/ttyACM0')
 
-it = pyfirmata.util.Iterator(board)
-it.start()
+led = board.get_pin('d:13:o')
 
-board.analog[0].enable_reporting()
-
+# Inicializa o LED
 board.digital[13].mode = pyfirmata.OUTPUT
+
+led.write(0)
 
 def main():
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
@@ -35,23 +35,28 @@ def main():
             for i in range(0, len(resultado)):
                 if resultado[i] == '1':
                     print('Ligando LED')
-                    board.digital[13].write(1)
+                    led.write(1)
                 elif resultado[i] == '0':
                     print('Desligando LED')
-                    board.digital[13].write(0)
-                time.sleep(5)
+                    led.write(0)
+                time.sleep(3)
             print('Fim da operação\n')
             channel.basic_publish(exchange='',
                             routing_key='fila',
                             body='fim da operação')
+            led.write(0)
         
     channel.basic_consume(queue='fila', on_message_callback=callback, auto_ack=True)
 
     print('Esperando resultado da operação...\n')
     channel.start_consuming()
 
-while True:
-    board.digital[13].write(0)
-    time.sleep(3)
-    board.digital[13].write(1)
-    main()
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('Interrompido')
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)
